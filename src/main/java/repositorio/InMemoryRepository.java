@@ -8,7 +8,7 @@ public class InMemoryRepository<T> {
     protected AtomicLong idGenerator = new AtomicLong();
 
     public T save(T entity) {
-        long id = idGenerator.incrementAndGet();
+        Long id = (Long) idGenerator.incrementAndGet();
         // Suponiendo que las entidades tienen un method setId
         try {
             String clase;
@@ -27,12 +27,9 @@ public class InMemoryRepository<T> {
         return Optional.ofNullable(data.get(id));
     }
 
-
-
     public List<T> findAll() {
         return new ArrayList<>(data.values());
     }
-
 
     public Optional<T> genericUpdate(Long id, T updatedEntity) {
         if (!data.containsKey(id)) {
